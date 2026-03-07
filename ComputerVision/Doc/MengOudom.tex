@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Lesson 6: Luminance and Histogram Equalization}
+\author{Meng Oudom}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Questions and Answers}
+
+\begin{enumerate}
+    % Question 1
+    \item \textbf{What is luminance?}
+    
+    Luminance represents the luminous intensity of a source per unit area of that source. In the context of image processing, it often refers to the brightness information of an image, separate from its color (chrominance) information. In the YCbCr color space, the Y component represents luminance. It is typically calculated from RGB values using a weighted sum, reflecting the human eye's sensitivity to different colors:
+    \[ Y = 0.299R + 0.587G + 0.114B \]
+
+    % Question 2
+    \item \textbf{Explain how to make image darkness?}
+    
+    To make an image darker, we decrease the intensity values of its pixels. This can be achieved by:
+    \begin{itemize}
+        \item \textbf{Subtraction:} Subtracting a constant value ($C$) from each pixel intensity ($I$). 
+        \[ I_{new} = I_{old} - C \]
+        (Ensure values do not go below 0).
+        \item \textbf{Scaling (Multiplication):} Multiplying pixel intensities by a factor less than 1 (e.g., $0.5$).
+        \[ I_{new} = I_{old} \times k \quad (\text{where } 0 < k < 1) \]
+    \end{itemize}
+
+    % Question 3
+    \item \textbf{Explain how to make image brightness?}
+    
+    To make an image brighter, we increase the intensity values of its pixels. This can be achieved by:
+    \begin{itemize}
+        \item \textbf{Addition:} Adding a constant value ($C$) to each pixel intensity ($I$).
+        \[ I_{new} = I_{old} + C \]
+        (Ensure values do not exceed the maximum intensity, e.g., 255 for 8-bit images).
+        \item \textbf{Scaling (Multiplication):} Multiplying pixel intensities by a factor greater than 1 (e.g., $1.5$).
+        \[ I_{new} = I_{old} \times k \quad (\text{where } k > 1) \]
+    \end{itemize}
+
+    % Question 4
+    \item \textbf{What is histogram equalization?}
+    
+    Histogram equalization is a computer image processing technique used to improve contrast in images. It accomplishes this by effectively spreading out the most frequent intensity values, i.e., stretching out the intensity range of the image. This technique is useful in images with backgrounds and foregrounds that are both bright or both dark. It calculates a transformation based on the cumulative distribution function (CDF) of the image's histogram.
+
+    % Question 5
+    \item \textbf{Explain how to calculate the histogram equalization?}
+    
+    The process to perform histogram equalization on a discrete grayscale image is as follows:
+    
+    \begin{enumerate}
+        \item \textbf{Calculate the Histogram:} Count the occurrence of each pixel intensity value $r_k$ in the image. Let $n_k$ be the number of pixels with intensity $r_k$.
+        
+        \item \textbf{Calculate the Probability Density Function (PDF):} Normalize the histogram by dividing the count of each intensity by the total number of pixels ($MN$, where $M$ is width and $N$ is height).
+        \[ p(r_k) = \frac{n_k}{MN} \]
+        
+        \item \textbf{Calculate the Cumulative Distribution Function (CDF):} Compute the cumulative sum of the PDF probabilities.
+        \[ CDF(r_k) = \sum_{j=0}^{k} p(r_j) \]
+        
+        \item \textbf{Calculate the Transformation Map:} Map the old intensity values to new values. For an image with $L$ possible intensity levels (e.g., 256 for 8-bit), the new intensity $s_k$ is calculated as:
+        \[ s_k = \text{round}((L - 1) \times CDF(r_k)) \]
+        
+        \item \textbf{Apply the Map:} Replace every pixel with intensity $r_k$ in the original image with the new intensity $s_k$.
+    \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

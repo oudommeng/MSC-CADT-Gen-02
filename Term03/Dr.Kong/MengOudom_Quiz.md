@@ -1,0 +1,13 @@
+##  Name: Meng Oudom
+## Student ID: IDTM020009
+
+1. What is Difference Between `banknotes0.py` and `banknotes1.py`?
+-> The Difference Between `banknotes0.py` and `banknotes1.py` is **Data Split**: The `banknotes0.py` manual shuffle+slice andthe `banknotes1.py` use train_test_split(evidence, labels, test_size=0.4) and split and evaluation method. **Count Accuracy** that `banknotes0.py` is loops and `banknotes1.py` uses .sum() on numpy array
+2. In `banknotes0.py` among 4 models, which one is the best result? why?
+-> In `banknotes0.py` that among of the **4 model**, that i was run it the model that give the best result is **SVC** because it found the optimal decision boundary (maximum margin hyperplane) that perfectly separates genuine from forged in 4D feature space.
+3. In `banknotes1.py`, if we change the value if test_size to 0.3, will the result chnage? why?
+-> Yes, the result will change because the test_size is the percentage of data that will be used for testing. So if we change the value of test_size, the percentage of data that will be used for testing will change. like when i testing on the `test_size=0.4` in SVC Model i got a `Accuracy: 99.51%` and when i test in `test_size=0.3` i got the Accuracy is improved to  `Accuracy: 100%` 
+4. In `Q-learning.py` How to know the agent move up, right, down, or , left ? how to know the agent move to the goal state?
+-> The agent knows which direction to move because each action is just a number 0 means go up, 1 means go right, 2 means go down, 3 means go left. The agent doesn't randomly pick anymore after training, it looks at the Q-table and picks whichever action has the highest value at that state using **np.argmax(Q[state])**. As for reaching the goal, the code checks self.state == self.goal after every step if they match, it sets done=True and the episode ends, and the agent gets +1 reward instead of the normal -1 penalty.
+5. In `Q-learning.py`, explain this code "env= Gridworld (5, (0,0), (4,4))" ? can we chnage values inside Gridworld()? why?
+-> **env = Gridworld(5, (0,0), (4,4))** just means that **creating a 5 by 5 grid**, the agent starts at the **top-left corner** which is position **(0,0)**, and the goal is at the **bottom-right corner (4,4)**. Yes can definitely change these values for example make it a **bigger grid like 8x8**, or put the start in the middle, or move the goal somewhere else. The only thing need to be careful about is that **start and goal positions** have to be inside the grid, so the numbers can't go below **0** or above **size-1**, otherwise the agent will never find the goal.
