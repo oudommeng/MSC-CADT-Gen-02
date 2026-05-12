@@ -1,0 +1,14 @@
+# Large files
+*.MOV
+*.mov
+*.m4a
+*.mp4
+*.avi
+*.mkv
+
+# Large data files
+**/ratings.csv
+**/kh_char_train.csv
+
+# macOS
+.DS_Store
